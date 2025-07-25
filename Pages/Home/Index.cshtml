@@ -1,0 +1,246 @@
+﻿@page
+@model BTK_Hackatlon_Project.Models.HomeViewModel
+@{
+}
+
+
+<!-- Hero Slider -->
+<section class="hero-slider mb-4">
+    <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+        </div>
+        <div class="carousel-inner rounded-3 overflow-hidden">
+            <div class="carousel-item active">
+                <div class="hero-slide bg-gradient-primary d-flex align-items-center" style="height: 400px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6">
+                                <h1 class="display-4 fw-bold text-white mb-3">Kış İndirimleri</h1>
+                                <p class="fs-5 text-white mb-4">Sezonun en popüler ürünlerinde %70'e varan indirimler!</p>
+                                <button class="btn btn-light btn-lg px-4">Hemen Keşfet</button>
+                            </div>
+                            <div class="col-lg-6">
+                                <img src="https://via.placeholder.com/500x300/FFFFFF/333333?text=Kış+Ürünleri" alt="Kış Koleksiyonu" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="hero-slide bg-gradient-success d-flex align-items-center" style="height: 400px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6">
+                                <h1 class="display-4 fw-bold text-white mb-3">Yeni Sezon</h1>
+                                <p class="fs-5 text-white mb-4">2025 İlkbahar koleksiyonu şimdi mağazalarımızda!</p>
+                                <button class="btn btn-light btn-lg px-4">Koleksiyonu Gör</button>
+                            </div>
+                            <div class="col-lg-6">
+                                <img src="https://via.placeholder.com/500x300/FFFFFF/333333?text=İlkbahar+2025" alt="İlkbahar Koleksiyonu" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="hero-slide bg-gradient-warning d-flex align-items-center" style="height: 400px; background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6">
+                                <h1 class="display-4 fw-bold text-dark mb-3">Elektronik</h1>
+                                <p class="fs-5 text-dark mb-4">En son teknoloji ürünleri en uygun fiyatlarla!</p>
+                                <button class="btn btn-dark btn-lg px-4">İncele</button>
+                            </div>
+                            <div class="col-lg-6">
+                                <img src="https://via.placeholder.com/500x300/333333/FFFFFF?text=Elektronik" alt="Elektronik Ürünler" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+</section>
+
+<div class="container">
+    <!-- Category Cards -->
+    <section class="category-section mb-5">
+        <h2 class="section-title fw-bold mb-4">Kategoriler</h2>
+        <div class="row g-3">
+            @foreach (var category in Model.Categories)
+            {
+                <div class="col-lg-2 col-md-4 col-6">
+                    <div class="category-card text-center p-4 border rounded-3 h-100 hover-lift">
+                        <div class="category-icon mb-3">
+                            <i class="@category.Icon @category.Color" style="font-size: 2.5rem;"></i>
+                        </div>
+                        <h6 class="fw-semibold mb-0">@category.Name</h6>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+
+    <!-- Flash Sales -->
+    <section class="flash-sales mb-5">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h2 class="section-title fw-bold mb-0">
+                <i class="fas fa-bolt text-warning me-2"></i>Flaş İndirimler
+            </h2>
+            <div class="countdown d-flex align-items-center">
+                <span class="me-2">Kalan süre:</span>
+                <div class="d-flex gap-1">
+                    <span class="badge bg-danger px-2 py-1">12</span>
+                    <span>:</span>
+                    <span class="badge bg-danger px-2 py-1">34</span>
+                    <span>:</span>
+                    <span class="badge bg-danger px-2 py-1">56</span>
+                </div>
+            </div>
+        </div>
+        <div class="row g-4">
+            @foreach (var product in Model.FlashSaleProducts)
+            {
+                <div class="col-lg-3 col-md-6">
+                    <div class="product-card border rounded-3 overflow-hidden h-100 hover-lift">
+                        <div class="product-image position-relative">
+                            <img src="@product.ImageUrl" alt="@product.Name" class="img-fluid w-100">
+                            @if (product.DiscountPercentage > 0)
+                            {
+                                <div class="discount-badge position-absolute top-0 start-0 bg-danger text-white px-2 py-1 m-2 rounded">
+                                    %@product.DiscountPercentage
+                                </div>
+                            }
+                            <div class="product-actions position-absolute top-0 end-0 p-2">
+                                <button class="btn btn-sm btn-light rounded-circle mb-1">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="product-info p-3">
+                            <h6 class="product-title mb-2">@product.Name</h6>
+                            <div class="rating mb-2">
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    if (i <= product.Rating)
+                                    {
+                                        <i class="fas fa-star text-warning"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="far fa-star text-muted"></i>
+                                    }
+                                }
+                                <span class="small text-muted ms-1">(@product.ReviewCount)</span>
+                            </div>
+                            <div class="price-section">
+                                <span class="current-price fw-bold text-danger fs-5">@product.Price.ToString("C", new System.Globalization.CultureInfo("tr-TR"))</span>
+                                @if (product.OldPrice.HasValue)
+                                {
+                                    <span class="old-price text-muted text-decoration-line-through ms-2">@product.OldPrice.Value.ToString("C", new System.Globalization.CultureInfo("tr-TR"))</span>
+                                }
+                            </div>
+                            <button class="btn btn-primary w-100 mt-2">
+                                <i class="fas fa-shopping-cart me-1"></i>Sepete Ekle
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+
+    <!-- Popular Products -->
+    <section class="popular-products mb-5">
+        <h2 class="section-title fw-bold mb-4">
+            <i class="fas fa-fire text-danger me-2"></i>Popüler Ürünler
+        </h2>
+        <div class="row g-4">
+            @foreach (var product in Model.PopularProducts)
+            {
+                <div class="col-lg-2 col-md-4 col-6">
+                    <div class="product-card border rounded-3 overflow-hidden h-100 hover-lift">
+                        <div class="product-image">
+                            <img src="@product.ImageUrl" alt="@product.Name" class="img-fluid w-100">
+                        </div>
+                        <div class="product-info p-2">
+                            <h6 class="product-title small mb-1">@product.Name</h6>
+                            <div class="price-section">
+                                <span class="current-price fw-bold text-primary">@product.Price.ToString("C", new System.Globalization.CultureInfo("tr-TR"))</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+
+    <!-- Campaign Banners -->
+    <section class="campaign-banners mb-5">
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="campaign-banner position-relative rounded-3 overflow-hidden">
+                    <img src="https://via.placeholder.com/600x250/FF6B6B/FFFFFF?text=Kadın+Kampanyası" alt="Kadın Kampanyası" class="img-fluid w-100">
+                    <div class="banner-content position-absolute top-50 start-0 translate-middle-y ps-4">
+                        <h3 class="text-white fw-bold">Kadın Koleksiyonu</h3>
+                        <p class="text-white">%50'ye varan indirimler</p>
+                        <button class="btn btn-light">Keşfet</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="campaign-banner position-relative rounded-3 overflow-hidden">
+                    <img src="https://via.placeholder.com/600x250/4ECDC4/FFFFFF?text=Erkek+Kampanyası" alt="Erkek Kampanyası" class="img-fluid w-100">
+                    <div class="banner-content position-absolute top-50 start-0 translate-middle-y ps-4">
+                        <h3 class="text-white fw-bold">Erkek Koleksiyonu</h3>
+                        <p class="text-white">Yeni sezon ürünleri</p>
+                        <button class="btn btn-light">İncele</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features-section">
+        <div class="row g-4">
+            <div class="col-md-3 text-center">
+                <div class="feature-item p-3">
+                    <i class="fas fa-shipping-fast text-primary mb-3" style="font-size: 2.5rem;"></i>
+                    <h5 class="fw-semibold">Hızlı Teslimat</h5>
+                    <p class="small text-muted">Aynı gün kargo seçeneği</p>
+                </div>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="feature-item p-3">
+                    <i class="fas fa-undo text-success mb-3" style="font-size: 2.5rem;"></i>
+                    <h5 class="fw-semibold">Kolay İade</h5>
+                    <p class="small text-muted">14 gün içinde ücretsiz iade</p>
+                </div>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="feature-item p-3">
+                    <i class="fas fa-shield-alt text-warning mb-3" style="font-size: 2.5rem;"></i>
+                    <h5 class="fw-semibold">Güvenli Ödeme</h5>
+                    <p class="small text-muted">256-bit SSL şifrelemesi</p>
+                </div>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="feature-item p-3">
+                    <i class="fas fa-headset text-info mb-3" style="font-size: 2.5rem;"></i>
+                    <h5 class="fw-semibold">7/24 Destek</h5>
+                    <p class="small text-muted">Canlı müşteri hizmetleri</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
